@@ -39,18 +39,20 @@ for t in u:
     
     perf_x_alone=1-x
     perf_y_alone=1-y
-    
+    #shared performance with priority scheduling
     perf_x_share_p=1.0/(l_hp*hpr_x+l_lp*(1-hpr_x))
     perf_y_share_p=1.0/l_lp
+    #shared performane without priority scheduling
+    perf_share=1.0/(1.0/(1-t))
     
     slowdown_x_y=perf_x_alone/perf_x_share_p
     slowdown_y_x=perf_y_alone/perf_y_share_p
     #shared whith priority slowdwon to alone
-    plt.plot(x, slowdown_x_y, 'r--')
-    plt.plot(x, slowdown_y_x, 'b-')
+    plt.plot(x, slowdown_x_y, 'red')
+    plt.plot(x, slowdown_y_x, 'blue')
     #shared with priority slowdown to shared without priority
-    plt.plot(x, (1-t)/perf_x_share_p, 'black')
-    plt.plot(x, (1-t)/perf_y_share_p, 'green')
+    plt.plot(x, perf_share/perf_x_share_p, 'black')
+    plt.plot(x, perf_share/perf_y_share_p, 'green')
 
 plt.show()
 
